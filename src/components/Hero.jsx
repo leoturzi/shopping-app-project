@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
+import { sliderItems } from '../sliderData';
 
 const Container = styled.div`
     width: 100%;
@@ -44,7 +45,7 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
     height: 100%;
     display: flex;
-    transition: all 1.5s ease;
+    /* transition: all 1.5s ease; */
     transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
@@ -90,38 +91,35 @@ const Button = styled.button`
 `;
 
 function Hero() {
+    const [slideIndex, setSlideIndex] = useState(0);
+    const handleClick = (direction) => {
+        if (direction === 'left') {
+            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+        } else {
+            setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+        }
+    };
+
     return (
         <Container>
-            <Arrow direction='left'>
+            <Arrow direction='left' onClick={() => handleClick('left')}>
                 <ArrowLeftOutlined />
             </Arrow>
-            <Wrapper>
-                <Slide bg={'#fbf0f4'}>
-                    <ImgContainer>
-                        <Image src='https://i.ibb.co/XsdmR2c/1.png' />
-                    </ImgContainer>
-                    <InfoContainer>
-                        <Title>Summer Sale</Title>
-                        <Desc>
-                            Don't miss out on the best deals this summer!
-                        </Desc>
-                        <Button>SHOP NOW</Button>
-                    </InfoContainer>
-                </Slide>
-                <Slide bg={'#fbf0f4'}>
-                    <ImgContainer>
-                        <Image src='https://i.ibb.co/XsdmR2c/1.png' />
-                    </ImgContainer>
-                    <InfoContainer>
-                        <Title>Summer Sale</Title>
-                        <Desc>
-                            Don't miss out on the best deals this summer!
-                        </Desc>
-                        <Button>SHOP NOW</Button>
-                    </InfoContainer>
-                </Slide>
+            <Wrapper slideIndex={slideIndex}>
+                {sliderItems.map((item) => (
+                    <Slide bg={item.bg} key={item.id}>
+                        <ImgContainer>
+                            <Image src={item.img} />
+                        </ImgContainer>
+                        <InfoContainer>
+                            <Title>{item.desc}</Title>
+                            <Desc>{item.desc}</Desc>
+                            <Button>SHOP NOW</Button>
+                        </InfoContainer>
+                    </Slide>
+                ))}
             </Wrapper>
-            <Arrow direction='right'>
+            <Arrow direction='right' onClick={() => handleClick('right')}>
                 <ArrowRightOutlined />
             </Arrow>
         </Container>
