@@ -44,3 +44,30 @@ export const categories = [
         title: 'CAMPERAS',
     },
 ];
+
+export const popularProducts = [
+    {
+        id: 1,
+        img: 'src/assets/img/product/jackets/buzo1.png',
+    },
+    {
+        id: 2,
+        img: 'src/assets/img/product/jackets/new-balance.png',
+    },
+    {
+        id: 3,
+        img: 'src/assets/img/product/shoes/janoski.png',
+    },
+    {
+        id: 4,
+        img: 'src/assets/img/product/shoes/nyjah.png',
+    },
+    {
+        id: 5,
+        img: 'src/assets/img/product/shirts/nike-sb1.png',
+    },
+    {
+        id: 6,
+        img: 'src/assets/img/product/shirts/nike-sb2.png',
+    },
+];
